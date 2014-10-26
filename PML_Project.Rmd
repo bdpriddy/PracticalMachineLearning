@@ -1,0 +1,57 @@
+---
+title: 'Practical Machine Learning Course Project'
+output: html_document
+---
+
+
+
+**Background**
+
+
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: http://groupware.les.inf.puc-rio.br/har (see the section on the Weight Lifting Exercise Dataset). 
+
+
+
+**Data** 
+
+
+The training data for this project are available here: 
+
+https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv
+
+The test data are available here: 
+
+https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv
+
+The data for this project come from this source: http://groupware.les.inf.puc-rio.br/har. 
+
+
+**Project Goal**
+
+The goal of this project is to predict the manner in which the test subjects did the dumbbell curl exercise. This is the "classe" variable in the training set. Any of the any of the other variables may be used to predict with. 
+
+
+
+**Data Preparation**
+
+The initial data set was downloaded and inspected.The data fields that consisted primarily of missing values were removed, as well as the fields that it was presumed wouldn't provide any relevant information for the exercise method classification. These fields included 'user_name', 'raw_timestamp_part_1', 'raw_timestamp_part_2', 'cvtd_timestamp', 'new_window', and 'num_window'.
+
+The remaining fields were then plotted individually with respect to  the 'classe' variable in order to determine if any possible relationship could be detected that would be beneficial to the classification process, and allow the exclusion of any non-relevant variables. So as to not lose any points in the test data part of the project, the training parameters were selected so that the model accuracy was the highest possible. Since this required many runs utilizing different learning algorithms in R, using the smallest number of fields in the training dataset was critical so that each run would complete quickly.
+
+The fields ultimately selected for the final classification run were 'roll_belt', 'pitch_belt', 'yaw_belt', 'magnet_belt_z', 'gyros_arm_x', 'magnet_arm_x', 'gyros_dumbbell_y', 'magnet_dumbbell_y', and 'pitch_forearm'.
+
+
+
+**Training**
+
+
+After much experimentation with different training algorithms and their associated parameters, the random forest algorithm was chosen with 10 trees and 10-fold cross validation, due to the high accuracy of its resulting predictions. Using an 80/20 training/testing split of the data set, the average classification accuracy rate was approximately 98%, with an estimated out of sample error of 0.035 and kappa = 0.9836.
+
+
+
+**Test Data Results**
+
+
+After the initial optimization runs with the data set being divided into separate training and testing sets, all of the data were used for the final training run, using the same algorithm and parameters described above. All 20 instances in the testing set were classified correctly, according to the automated grading application.
+
+
